@@ -4,8 +4,13 @@
     <title>VibeControl</title>
 </head>
 <body>
-    <img id="button1" src="https://i.postimg.cc/66n19jKz/OIP.jpg" alt="Button 1" style="cursor:pointer; display:block;" width="150">
-    <img id="button2" src="https://i.postimg.cc/RZXDkWmB/bulb-10.jpg" alt="Button 2" style="cursor:pointer; display:none;" width="150">
+    <button id="button1">Vibe_ON</button>
+    <button id="button2">VIBE_OFF</button>
+    <br><br>
+	<img id="button3" src="https://i.postimg.cc/66n19jKz/OIP.jpg" alt="Button 3" style="cursor:pointer; display:block;" width="150">
+    <img id="button4" src="https://i.postimg.cc/RZXDkWmB/bulb-10.jpg" alt="Button 4" style="cursor:pointer; display:none;" width="150">
+
+   <!-- <img id="myImage" src="https://i.postimg.cc/d3rfpnsH/OIP-1.jpg" alt="Image" width="150"> -->
 
     <script>
         document.getElementById('button1').addEventListener('click', function() {
@@ -15,9 +20,10 @@
             .then(response => response.text())
             .then(data => {
                 console.log('Request to ON URL succeeded with response:', data);
-                document.getElementById('button1').style.display = 'none'; // Hide button1
-                document.getElementById('button2').style.display = 'block'; // Show button2
-            })
+               // document.getElementById('myImage').src = 'https://i.postimg.cc/RZXDkWmB/bulb-10.jpg'; // Change this to the path of your image for URL 1
+				document.getElementById('button3').style.display = 'none'; // Hide button3
+                document.getElementById('button4').style.display = 'block'; // Show button4
+			})
             .catch((error) => {
                 console.error('Request to ON URL failed', error);
             });
@@ -30,13 +36,49 @@
             .then(response => response.text())
             .then(data => {
                 console.log('Request to OFF URL succeeded with response:', data);
-                document.getElementById('button2').style.display = 'none'; // Hide button2
-                document.getElementById('button1').style.display = 'block'; // Show button1
+                //document.getElementById('myImage').src = 'https://i.postimg.cc/66n19jKz/OIP.jpg'; // Change this to the path of your image for URL 2
+				document.getElementById('button4').style.display = 'none'; // Hide button4
+                document.getElementById('button3').style.display = 'block'; // Show button3
+		   })
+            .catch((error) => {
+                console.error('Request to OFF URL failed', error);
+            });
+        });
+    </script>
+	
+	 
+    <script>
+        document.getElementById('button3').addEventListener('click', function() {
+            fetch('https://blr1.blynk.cloud/external/api/update?token=w0WFByokL6LUa_hjAsMiRvESiw0IY2Kx&V0=1', {
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Request to ON URL succeeded with response:', data);
+                document.getElementById('button3').style.display = 'none'; // Hide button1
+                document.getElementById('button4').style.display = 'block'; // Show button2
+            })
+            .catch((error) => {
+                console.error('Request to ON URL failed', error);
+            });
+        });
+
+        document.getElementById('button4').addEventListener('click', function() {
+            fetch('https://blr1.blynk.cloud/external/api/update?token=w0WFByokL6LUa_hjAsMiRvESiw0IY2Kx&V0=0', {
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Request to OFF URL succeeded with response:', data);
+                document.getElementById('button4').style.display = 'none'; // Hide button2
+                document.getElementById('button3').style.display = 'block'; // Show button1
             })
             .catch((error) => {
                 console.error('Request to OFF URL failed', error);
             });
         });
     </script>
+	
+	
 </body>
 </html>
